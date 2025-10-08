@@ -38,6 +38,11 @@ prettyPrint(tree.root);
 
 //tree.inOrderForEach(console.log,tree.root);
 
+/*
 console.log(`finding height for value: ${randomArray[5]}`);
 console.log(tree.height(tree.root,randomArray[5]));
-//console.log(tree.find(tree.root,randomArray[5]));
+*/
+
+console.log(`finding depth for value: ${randomArray[5]}`);
+const result = tree.depth(tree.root,randomArray[5])
+console.log(result);

@@ -156,11 +156,15 @@ class Tree{
         return Math.max(this.heightRec(leftSide,value)
                             ,this.heightRec(rightSide,value)) + 1
     }
-    depth(root,value){
-        //base case, for when the value is not found
+    depth(root,value, valueDepth = 0){
+        //base cases, for when the value is not found
         if(root === null)
-            return null;
-
+            return null;            
+        else if(root.data > value)
+            valueDepth =  1 + this.depth(root.left, value, valueDepth);
+        else if (root.data < value)
+            valueDepth =  1 + this.depth(root.right, value, valueDepth);
+        return valueDepth;
     }
 
 }
