@@ -126,7 +126,7 @@ class Tree{
         this.inOrderForEach(callback,rightSide);
     }
 
-        postOrderForEach(callback,root){
+    postOrderForEach(callback,root){
         if(!callback)
             throw new Error("No Callback function provided");
         //base case
@@ -141,6 +141,8 @@ class Tree{
 
     height(root,value){
         const foundNode =  this.find(root,value);
+        if (foundNode === null)
+            return null;
         return this.heightRec(foundNode, value);
     }
 
@@ -154,7 +156,12 @@ class Tree{
         return Math.max(this.heightRec(leftSide,value)
                             ,this.heightRec(rightSide,value)) + 1
     }
+    depth(root,value){
+        //base case, for when the value is not found
+        if(root === null)
+            return null;
 
+    }
 
 }
 
