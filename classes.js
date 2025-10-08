@@ -61,14 +61,11 @@ class Tree{
             else{
                 let successorNode = this.findInorderSuccessor(root);
                 //swap value to be deleted, with the successor
-                const tmp = root.data;
                 root.data = successorNode.data;
-                successorNode.data = tmp;
-                //root = this.root(root,value);
-
+                successorNode.data = value;
+                root.right = this.delete(root.right, value);
+                //successorNode = this.delete(successorNode, value);
             }
-                
-
         }
         return root;
     }
@@ -89,6 +86,18 @@ class Tree{
             return this.find(root.left, value);
         else
             return this.find(root.right, value);
+    }
+
+    levelOrderForEach(callback,q = [this.root]){
+        if(!callback)
+            throw new Error("No Callback function provided");
+        //base case
+        if(q.length === 0)
+            return
+        const cur = q[0];
+        callback(cur.data);
+        q = q.slice(1).concat([cur.left,cur.right].filter((ele) => ele !== null));
+        return this.levelOrderForEach(callback,q);
     }
 }
 
