@@ -122,8 +122,8 @@ class Tree{
         const leftSide = root === null ? null : root.left;
         const rightSide = root === null ? null : root.right;
         callback(root.data);
-        this.inOrderForEach(callback,leftSide);
-        this.inOrderForEach(callback,rightSide);
+        this.preOrderForEach(callback,leftSide);
+        this.preOrderForEach(callback,rightSide);
     }
 
     postOrderForEach(callback,root){
@@ -134,8 +134,8 @@ class Tree{
             return
         const leftSide = root === null ? null : root.left;
         const rightSide = root === null ? null : root.right;
-        this.inOrderForEach(callback,leftSide);
-        this.inOrderForEach(callback,rightSide);
+        this.postOrderForEach(callback,leftSide);
+        this.postOrderForEach(callback,rightSide);
         callback(root.data);
     }
 
@@ -156,7 +156,8 @@ class Tree{
         return Math.max(this.heightRec(leftSide)
                             ,this.heightRec(rightSide)) + 1
     }
-    depth(root,value, valueDepth = 0){
+    depth_archived(root,value, valueDepth = 0){
+        //archived, because currently returns 1 for non-existent values.
         //base cases, for when the value is not found
         if(root === null)
             return null;            
@@ -166,18 +167,24 @@ class Tree{
             valueDepth =  1 + this.depth(root.right, value, valueDepth);
         return valueDepth;
     }
+    depth(root, value, depthCount = 0) {
+        if (root === null) return null; // value not found
+        if (root.value === value) return depthCount;
 
-    isBalanced(root){
-        //base case, root is null, return 0
-        if(root === null)
-            return
-        const leftHeight = this.heightRec(root.left) ;
-        const rightHeight = this.heightRec(root.right) ;
-        if (Math.abs(leftHeight - rightHeight) > 1)
-            return false
-        this.isBalanced(root.left);
-        this.isBalanced(root.right);
-        return true
+        if (value < root.value)
+            return depth(root.left, value, depthCount + 1);
+        else
+            return depth(root.right, value, depthCount + 1);
+    }
+
+
+    isBalanced(root) {
+    if (root === null) return true;
+    const leftHeight = this.heightRec(root.left);
+    const rightHeight = this.heightRec(root.right);
+
+    if (Math.abs(leftHeight - rightHeight) > 1) return false;
+    return this.isBalanced(root.left) && this.isBalanced(root.right);
     }
 
     rebalance(root){

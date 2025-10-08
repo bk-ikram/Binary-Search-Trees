@@ -49,6 +49,8 @@ const result = tree.depth(tree.root,randomArray[5])
 console.log(result);
 */
 //--------------
+
+/*
 console.log(`checking if tree is balanced before insertion:`);
 console.log(tree.isBalanced(tree.root));
 
@@ -84,3 +86,7 @@ console.log("inorder printout of the tree")
 tree.inOrderForEach(console.log,tree.root);
 console.log("postorder printout of the tree")
 tree.postOrderForEach(console.log,tree.root);
+
+*/
+console.log(`finding depth for value: ${randomArray[5]}`);
+console.log(tree.depth(tree.root,randomArray[5]))
