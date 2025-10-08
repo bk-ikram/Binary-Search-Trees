@@ -143,18 +143,18 @@ class Tree{
         const foundNode =  this.find(root,value);
         if (foundNode === null)
             return null;
-        return this.heightRec(foundNode, value);
+        return this.heightRec(foundNode);
     }
 
-    heightRec(root, value){
+    heightRec(root){
         //base case
         if(root === null)
             return 0;
         const leftSide = root === null ? null : root.left;
         const rightSide = root === null ? null : root.right;
         //check if tot height of left side vs right side
-        return Math.max(this.heightRec(leftSide,value)
-                            ,this.heightRec(rightSide,value)) + 1
+        return Math.max(this.heightRec(leftSide)
+                            ,this.heightRec(rightSide)) + 1
     }
     depth(root,value, valueDepth = 0){
         //base cases, for when the value is not found
@@ -165,6 +165,25 @@ class Tree{
         else if (root.data < value)
             valueDepth =  1 + this.depth(root.right, value, valueDepth);
         return valueDepth;
+    }
+
+    isBalanced(root){
+        //base case, root is null, return 0
+        if(root === null)
+            return
+        const leftHeight = this.heightRec(root.left) ;
+        const rightHeight = this.heightRec(root.right) ;
+        if (Math.abs(leftHeight - rightHeight) > 1)
+            return false
+        this.isBalanced(root.left);
+        this.isBalanced(root.right);
+        return true
+    }
+
+    rebalance(root){
+        const data = [];
+        this.inOrderForEach((ele) => data.push(ele),root);
+        this.root = this.buildTree(data);
     }
 
 }
