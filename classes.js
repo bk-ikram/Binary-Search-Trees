@@ -99,7 +99,49 @@ class Tree{
         q = q.slice(1).concat([cur.left,cur.right].filter((ele) => ele !== null));
         return this.levelOrderForEach(callback,q);
     }
+
+    inOrderForEach(callback,root){
+        if(!callback)
+            throw new Error("No Callback function provided");
+        //base case
+        if(root === null)
+            return
+        const leftSide = root === null ? null : root.left;
+        const rightSide = root === null ? null : root.right;
+        this.inOrderForEach(callback,leftSide);
+        callback(root.data);
+        this.inOrderForEach(callback,rightSide);
+    }
+
+    preOrderForEach(callback,root){
+        if(!callback)
+            throw new Error("No Callback function provided");
+        //base case
+        if(root === null)
+            return
+        const leftSide = root === null ? null : root.left;
+        const rightSide = root === null ? null : root.right;
+        callback(root.data);
+        this.inOrderForEach(callback,leftSide);
+        this.inOrderForEach(callback,rightSide);
+    }
+
+        postOrderForEach(callback,root){
+        if(!callback)
+            throw new Error("No Callback function provided");
+        //base case
+        if(root === null)
+            return
+        const leftSide = root === null ? null : root.left;
+        const rightSide = root === null ? null : root.right;
+        this.inOrderForEach(callback,leftSide);
+        this.inOrderForEach(callback,rightSide);
+        callback(root.data);
+    }
+
+
 }
+
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {

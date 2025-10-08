@@ -34,4 +34,6 @@ prettyPrint(tree.root);
 //console.log(`Finding successor for ${randomArray[5]}`)
 //console.log(tree.findInorderSuccessor(tree.root,randomArray[5]));
 
-tree.levelOrderForEach(console.log);
+//tree.levelOrderForEach(console.log);
+
+tree.inOrderForEach(console.log,tree.root);
