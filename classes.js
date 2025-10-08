@@ -139,6 +139,22 @@ class Tree{
         callback(root.data);
     }
 
+    height(root,value){
+        const foundNode =  this.find(root,value);
+        return this.heightRec(foundNode, value);
+    }
+
+    heightRec(root, value){
+        //base case
+        if(root === null)
+            return 0;
+        const leftSide = root === null ? null : root.left;
+        const rightSide = root === null ? null : root.right;
+        //check if tot height of left side vs right side
+        return Math.max(this.heightRec(leftSide,value)
+                            ,this.heightRec(rightSide,value)) + 1
+    }
+
 
 }
 
